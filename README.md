@@ -49,7 +49,7 @@ The application uses Spring Boot's default HTTP port, `8080`, unless it is overr
 GET /getpersons
 ```
 
-This endpoint retrieves every person, serializes the collection to JSON, places it in the `message` view-model attribute, and renders the `HelloWorld` Thymeleaf template. It is an HTML response rather than a JSON API response.
+This endpoint retrieves every person, places the collection in the `persons` view-model attribute, and renders the `HelloWorld` Thymeleaf template as an HTML table. It is an HTML response rather than a JSON API response.
 
 ### Get one person
 

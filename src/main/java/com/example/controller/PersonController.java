@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tools.jackson.databind.ObjectMapper;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,9 +20,7 @@ public class PersonController {
     @GetMapping("/getpersons")
     public String getAllPersons(Model model){
        List<Person> listOfPerson= personService.getAllPersons();
-       ObjectMapper mapper=new ObjectMapper();
-       String listOfString=mapper.writeValueAsString(listOfPerson);
-       model.addAttribute("message",listOfString);
+       model.addAttribute("persons", listOfPerson);
        return "HelloWorld";
 
     }

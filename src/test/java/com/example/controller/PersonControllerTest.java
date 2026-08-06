@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
-import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.util.List;
@@ -33,7 +31,7 @@ class PersonControllerTest {
     private PersonController personController;
 
     @Test
-    void getAllPersonsAddsSerializedPersonsToModelAndReturnsHelloWorld() {
+    void getAllPersonsAddsPersonsToModelAndReturnsHelloWorld() {
         Person person = person(1, "Doe", "Jane");
         when(personService.getAllPersons()).thenReturn(List.of(person));
         Model model = new ExtendedModelMap();
@@ -41,11 +39,7 @@ class PersonControllerTest {
         String viewName = personController.getAllPersons(model);
 
         assertEquals("HelloWorld", viewName);
-        JsonNode serializedPersons = new ObjectMapper().readTree((String) model.getAttribute("message"));
-        assertEquals(1, serializedPersons.size());
-        assertEquals(1, serializedPersons.get(0).get("personId").asInt());
-        assertEquals("Doe", serializedPersons.get(0).get("lastName").asString());
-        assertEquals("Jane", serializedPersons.get(0).get("firstname").asString());
+        assertSame(person, ((List<?>) model.getAttribute("persons")).get(0));
         verify(personService).getAllPersons();
     }
 

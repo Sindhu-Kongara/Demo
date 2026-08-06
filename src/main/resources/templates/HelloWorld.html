@@ -1,9 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; color: #1f2937; }
+        table { border-collapse: collapse; width: 100%; max-width: 1000px; }
+        th, td { border: 1px solid #d1d5db; padding: 0.75rem; text-align: left; }
+        th { background: #1d4ed8; color: white; }
+        tbody tr:nth-child(even) { background: #f3f4f6; }
+        .empty-message { color: #6b7280; }
+    </style>
 </head>
 <body>
-<h1>Welcome to Spring Boot</h1>
-<p th:text="${message}">
+<h1>People</h1>
+
+<p class="empty-message" th:if="${#lists.isEmpty(persons)}">No people found.</p>
+
+<table th:unless="${#lists.isEmpty(persons)}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Occupation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.personId}"></td>
+        <td th:text="${person.firstname}"></td>
+        <td th:text="${person.lastName}"></td>
+        <td th:text="${person.address}"></td>
+        <td th:text="${person.city}"></td>
+        <td th:text="${person.occupations != null ? person.occupations.occ_Name : '-'}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
