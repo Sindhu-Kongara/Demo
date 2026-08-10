@@ -12,7 +12,7 @@ RUN gradle clean build --refresh-dependencies --no-daemon --stacktrace
 
 #stage2 runtime
 
-FROM amazoncorreto:26.0.2-al2023-headless as runner1
+FROM amazoncorretto:26.0.2-al2023-headless AS runner1
 
 # Set working directory
 WORKDIR /tmp
