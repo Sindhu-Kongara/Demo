@@ -34,10 +34,10 @@ jobs:
       - name: Tag Docker image
         run: |
           docker tag my-java-app:latest \
-          ${{ steps.login-ecr.outputs.registry }}/my-java-app:latest
+          ${{ vars.ECR_REGISTRY }}/my-java-app:latest
 
       # 6. Push Docker image to ECR
       - name: Push Docker image
         run: |
           docker push \
-          ${{ steps.login-ecr.outputs.registry }}/my-java-app:latest
+          ${{ vars.ECR_REGISTRY }}/my-java-app:latest
